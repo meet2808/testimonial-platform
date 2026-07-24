@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum TestimonialStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// ─── Models ───────────────────────────────────────────────────────────────────
+
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // bcrypt hash — never plain text
+  createdAt DateTime @default(now())
+
+  @@map("admins")
+}
+
+model Testimonial {
+  id              String            @id @default(uuid())
+  customerName    String            @db.VarChar(100)
+  email           String            @db.VarChar(255)
+  company         String            @db.VarChar(100)
+  message         String            @db.Text
+  rating          Int
+  profileImageUrl String?
+  status          TestimonialStatus @default(PENDING)
+  consentGiven    Boolean
+  submittedAt     DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@map("testimonials")
+}
