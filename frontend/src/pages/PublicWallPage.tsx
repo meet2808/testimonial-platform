@@ -4,7 +4,7 @@ import Avatar from '../components/ui/Avatar';
 import StarRating from '../components/ui/StarRating';
 import Spinner from '../components/ui/Spinner';
 import { formatDate, truncate } from '../utils/formatters';
-import { Testimonial } from '../types';
+import type { Testimonial } from '../types';
 
 // ─── Testimonial Card ─────────────────────────────────────────────────────────
 const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({

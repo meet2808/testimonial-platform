@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useWidgetTestimonials } from '../hooks/useTestimonials';
 import Avatar from '../components/ui/Avatar';
@@ -102,16 +102,6 @@ const WidgetPage: React.FC = () => {
     }
     return [...testimonials, ...testimonials];
   }, [testimonials]);
-
-  // ── Manual Scroll Controls ──────────────────────────────────────────────────
-  const scrollManual = useCallback((direction: 'left' | 'right') => {
-    if (!carouselRef.current) return;
-    const scrollAmount = 280; // card width + gap
-    carouselRef.current.scrollBy({
-      left: direction === 'right' ? scrollAmount : -scrollAmount,
-      behavior: 'smooth',
-    });
-  }, []);
 
   // ── Ultra-Smooth Continuous Auto-Scroll (requestAnimationFrame) ─────────────
   useEffect(() => {

@@ -1,15 +1,15 @@
 /// <reference path="../types/express.d.ts" />
-import { Request, Response } from 'express';
+import { Request, Response, CookieOptions } from 'express';
 import { authService } from '../services/auth.service';
 import { sendSuccess } from '../utils/response';
 import { asyncHandler } from '../utils/asyncHandler';
 import config from '../config/app.config';
 
 // ─── Cookie Configuration ─────────────────────────────────────────────────────
-const COOKIE_OPTIONS = {
+const COOKIE_OPTIONS: CookieOptions = {
   httpOnly: true,        // JS cannot access this cookie (XSS protection)
   secure: config.server.isProduction,   // HTTPS only in production
-  sameSite: 'strict' as const,          // CSRF protection
+  sameSite: config.server.isProduction ? 'none' : 'strict',          // CSRF protection
   maxAge: 24 * 60 * 60 * 1000,         // 24 hours in milliseconds
   path: '/',
 };
