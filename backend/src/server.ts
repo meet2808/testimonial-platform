@@ -11,7 +11,7 @@ async function startServer(): Promise<void> {
     await prisma.$connect();
     console.log('✅ Database connected successfully.');
 
-    // ── Background cleanup check for rejected testimonials > 30 minutes old ──
+    // ── Initial background cleanup check on startup ──
     try {
       const result = await testimonialService.cleanupExpiredRejected();
       if (result.count > 0) {
@@ -20,6 +20,21 @@ async function startServer(): Promise<void> {
     } catch (err) {
       console.warn('⚠️ Rejected testimonials cleanup check failed:', err);
     }
+
+    // ── Schedule automatic background cleanup every 5 minutes ──
+    const FIVE_MINUTES = 5 * 60 * 1000;
+    setInterval(() => {
+      void (async () => {
+        try {
+          const result = await testimonialService.cleanupExpiredRejected();
+          if (result.count > 0) {
+            console.log(`🧹 [Auto-Cron] Purged ${result.count} expired rejected testimonial(s).`);
+          }
+        } catch (err) {
+          console.warn('⚠️ [Auto-Cron] Cleanup check failed:', err);
+        }
+      })();
+    }, FIVE_MINUTES);
 
     app.listen(PORT, () => {
       console.log('');
