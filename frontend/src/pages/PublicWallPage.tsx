@@ -13,7 +13,10 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({
   return (
     <article className="bg-gray-900/60 border border-white/10 rounded-2xl p-6 flex flex-col gap-4 hover:border-white/20 hover:bg-gray-900/80 transition-all duration-300 hover:-translate-y-0.5 group">
       {/* Rating */}
-      <StarRating rating={testimonial.rating} size="sm" />
+      <div className="flex items-center gap-1.5">
+        <StarRating rating={testimonial.rating} size="sm" />
+        <span className="text-xs text-gray-400 font-medium tabular-nums">{testimonial.rating}</span>
+      </div>
 
       {/* Message */}
       <blockquote className="text-gray-300 text-sm leading-relaxed flex-1">

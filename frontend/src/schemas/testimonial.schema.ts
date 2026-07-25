@@ -27,9 +27,9 @@ export const createTestimonialSchema = z.object({
 
   rating: z
     .number({ required_error: 'Please select a rating' })
-    .int()
-    .min(1, 'Rating must be at least 1')
-    .max(5, 'Rating must not exceed 5'),
+    .min(0.5, 'Rating must be at least 0.5')
+    .max(5, 'Rating must not exceed 5')
+    .refine((val) => val % 0.5 === 0, 'Rating must be in increments of 0.5'),
 
   profileImage: z
     .instanceof(File)

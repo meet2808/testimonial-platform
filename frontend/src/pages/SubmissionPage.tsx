@@ -171,15 +171,16 @@ const SubmissionPage: React.FC = () => {
                 Rating <span className="text-red-400">*</span>
               </label>
               <div className="flex items-center gap-3">
+                <input type="hidden" value={rating} {...register('rating', { valueAsNumber: true })} />
                 <StarRating
                   rating={rating}
                   size="lg"
                   interactive
-                  onChange={(val) => setValue('rating', val, { shouldValidate: true })}
+                  onChange={(val) => setValue('rating', val, { shouldValidate: true, shouldDirty: true, shouldTouch: true })}
                 />
                 {rating > 0 && (
-                  <span className="text-sm text-gray-400">
-                    {['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'][rating]}
+                  <span className="text-sm text-gray-400 font-medium tabular-nums">
+                    {rating} / 5
                   </span>
                 )}
               </div>

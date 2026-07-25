@@ -36,9 +36,9 @@ export const createTestimonialSchema = z.object({
     .pipe(
       z
         .number({ required_error: 'Rating is required' })
-        .int('Rating must be a whole number')
-        .min(1, 'Rating must be at least 1')
+        .min(0.5, 'Rating must be at least 0.5')
         .max(5, 'Rating must not exceed 5')
+        .refine((val) => val % 0.5 === 0, 'Rating must be in increments of 0.5')
     ),
 
   consentGiven: z

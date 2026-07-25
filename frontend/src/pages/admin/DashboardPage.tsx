@@ -348,7 +348,10 @@ const DashboardPage: React.FC = () => {
 
                       {/* Rating */}
                       <td className="px-6 py-4 hidden md:table-cell">
-                        <StarRating rating={t.rating} size="sm" />
+                        <div className="flex items-center gap-1.5">
+                          <StarRating rating={t.rating} size="sm" />
+                          <span className="text-xs text-gray-400 font-medium tabular-nums">{t.rating}</span>
+                        </div>
                       </td>
 
                       {/* Message preview */}
@@ -510,7 +513,10 @@ const DashboardPage: React.FC = () => {
               </div>
               <div className="ml-auto flex flex-col items-end gap-2">
                 <Badge status={detailTestimonial.status} />
-                <StarRating rating={detailTestimonial.rating} size="sm" />
+                <div className="flex items-center gap-1.5">
+                  <StarRating rating={detailTestimonial.rating} size="sm" />
+                  <span className="text-xs text-gray-400 font-medium tabular-nums">{detailTestimonial.rating}</span>
+                </div>
               </div>
             </div>
 

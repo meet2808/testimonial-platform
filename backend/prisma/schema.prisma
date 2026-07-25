@@ -35,7 +35,7 @@ model Testimonial {
   email           String            @db.VarChar(255)
   company         String            @db.VarChar(100)
   message         String            @db.Text
-  rating          Int
+  rating          Float
   profileImageUrl String?
   status          TestimonialStatus @default(PENDING)
   consentGiven    Boolean

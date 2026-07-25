@@ -212,7 +212,10 @@ const WidgetPage: React.FC = () => {
                   key={t.id}
                   className={`w-full ${theme.cardBg} border ${theme.borderColor} rounded-xl p-5 flex flex-col gap-3 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5`}
                 >
-                  <StarRating rating={t.rating} size="sm" />
+                  <div className="flex items-center gap-1.5">
+                    <StarRating rating={t.rating} size="sm" />
+                    <span className={`text-xs ${theme.mutedColor} font-medium tabular-nums`}>{t.rating}</span>
+                  </div>
                   <blockquote className={`${theme.textColor} text-xs leading-relaxed flex-1`}>
                     &ldquo;{truncate(t.message, 140)}&rdquo;
                   </blockquote>
@@ -243,7 +246,10 @@ const WidgetPage: React.FC = () => {
                   key={`${t.id}-${idx}`}
                   className={`flex-shrink-0 w-64 ${theme.cardBg} border ${theme.borderColor} rounded-xl p-4 flex flex-col gap-3 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5`}
                 >
-                  <StarRating rating={t.rating} size="sm" />
+                  <div className="flex items-center gap-1.5">
+                    <StarRating rating={t.rating} size="sm" />
+                    <span className={`text-xs ${theme.mutedColor} font-medium tabular-nums`}>{t.rating}</span>
+                  </div>
                   <blockquote className={`${theme.textColor} text-xs leading-relaxed flex-1`}>
                     &ldquo;{truncate(t.message, 120)}&rdquo;
                   </blockquote>
