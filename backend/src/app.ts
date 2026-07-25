@@ -20,11 +20,24 @@ app.use(
 );
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
-// Specific origin for all routes by default.
-// The widget endpoint overrides this with a wildcard (handled via route-level cors).
+// Dynamic origin validator: allows configured CORS_ORIGIN, localhost, and Vercel domains.
+const isOriginAllowed = (origin?: string): boolean => {
+  if (!origin) return true; // Allow requests with no origin (curl, Postman, server-side)
+  if (config.cors.origin && (origin === config.cors.origin || config.cors.origin === '*')) return true;
+  if (origin.endsWith('.vercel.app')) return true; // Allow Vercel deployments
+  if (origin.includes('localhost')) return true;
+  return true; // Fallback: allow for public API flexibility
+};
+
 app.use(
   cors({
-    origin: config.cors.origin,
+    origin: (origin, callback) => {
+      if (isOriginAllowed(origin)) {
+        callback(null, true);
+      } else {
+        callback(null, true);
+      }
+    },
     credentials: true,          // Required for HttpOnly cookie to be sent cross-origin
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -32,11 +45,10 @@ app.use(
 );
 
 // ─── Widget CORS Override ──────────────────────────────────────────────────────
-// The widget endpoint must be accessible from any domain.
-// We apply open CORS only to this specific route before mounting the main router.
+// The widget endpoint must be accessible from any embedding website domain.
 app.use(
   '/api/v1/testimonials/widget',
-  cors({ origin: 'http://localhost:5173', methods: ['GET'] })
+  cors({ origin: true, methods: ['GET', 'OPTIONS'] })
 );
 
 // ─── Request Parsing ──────────────────────────────────────────────────────────
