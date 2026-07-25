@@ -67,6 +67,24 @@ if (config.server.isDevelopment) {
 const uploadsPath = path.resolve(config.upload.dir);
 app.use('/api/v1/uploads', express.static(uploadsPath));
 
+// ─── Root Home Endpoint ────────────────────────────────────────────────────────
+// Welcome endpoint so visitors can verify the backend API server status immediately.
+app.get('/', (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: '🚀 Testimonial Platform API Server is running live!',
+    version: '1.0.0',
+    documentation: 'https://github.com/meet2808/testimonial-platform#readme',
+    endpoints: {
+      health: '/api/v1/health',
+      publicTestimonials: '/api/v1/testimonials/public',
+      widgetTestimonials: '/api/v1/testimonials/widget',
+      adminAuth: '/api/v1/auth/login',
+    },
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // ─── API Routes ───────────────────────────────────────────────────────────────
 app.use('/api/v1', router);
 
