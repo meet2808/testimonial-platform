@@ -30,11 +30,12 @@ I decided to focus on building/implementing core features first and skip adding 
 
 For each decision that shaped the project (aim for 3–6), one short block:
 
-* **Decision:** what you chose (e.g. how the widget embeds, what happens to rejected testimonials, DB choice).
-* **Options:** what else you considered.
-* **Why:** why you picked this one.
-
-Include the calls you made where the brief was silent.
+* **Decision 1:** How rejected testimonials data are handled ?
+   - As of now if Admin reject any testimonials then it leave in our database as it is and waiting re-approve by admin. But what if admin never going to re-approved or approve that testimonials. So I have decided that after submitting testimonial if admin is not approve that testimonial in next 30 minutes then remove that record from database permenently without manual deletion from admin side using pg_cron functionality.
+* **Options:**
+  - As a optional behaviour I have assume that admin will delete those records manually but if there are too much records are there so this works become too lenghty for admin.
+* **Why:**
+  - Using of this functionality it is easy to manage our database effectively and also we are able handle those unused data without human involvment. 
 
 ## 3\. Working with AI agents
 

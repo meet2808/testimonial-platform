@@ -93,6 +93,13 @@ export const testimonialService = {
   },
 
   /**
+   * Cleanup/delete testimonials rejected more than 3 days ago.
+   */
+  cleanupExpiredRejected: async () => {
+    return testimonialRepository.deleteExpiredRejected();
+  },
+
+  /**
    * Get aggregate stats for the admin dashboard.
    */
   getStats: async () => {

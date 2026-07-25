@@ -93,6 +93,21 @@ export const testimonialRepository = {
   },
 
   /**
+   * Delete all testimonials with REJECTED status updated more than 30 minutes ago.
+   */
+  deleteExpiredRejected: async () => {
+    const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+    return prisma.testimonial.deleteMany({
+      where: {
+        status: 'REJECTED',
+        updatedAt: {
+          lt: thirtyMinutesAgo,
+        },
+      },
+    });
+  },
+
+  /**
    * Get aggregate counts for the admin statistics dashboard.
    */
   getStats: async () => {
