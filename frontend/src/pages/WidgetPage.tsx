@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { useWidgetTestimonials } from '../hooks/useTestimonials';
 import Avatar from '../components/ui/Avatar';
 import StarRating from '../components/ui/StarRating';
-import Spinner from '../components/ui/Spinner';
 import { truncate } from '../utils/formatters';
 
 import CardSkeletonGrid from '../components/ui/CardSkeleton';
