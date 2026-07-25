@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
-import { loginSchema, LoginFormData } from '../../schemas/auth.schema';
+import { loginSchema, type LoginFormData } from '../../schemas/auth.schema';
 import { useAuth } from '../../context/AuthContext';
 import { extractErrorMessage } from '../../utils/formatters';
 import Input from '../../components/ui/Input';

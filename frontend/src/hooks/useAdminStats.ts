@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { testimonialApi } from '../api/testimonial.api';
-import { AdminStats } from '../types';
+import type { AdminStats } from '../types';
 import { extractErrorMessage } from '../utils/formatters';
 
 // ─── useAdminStats ────────────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { testimonialApi } from '../api/testimonial.api';
-import { Testimonial } from '../types';
+import type { Testimonial } from '../types';
 import { extractErrorMessage } from '../utils/formatters';
 
 // ─── usePublicTestimonials ────────────────────────────────────────────────────

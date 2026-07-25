@@ -1,12 +1,12 @@
 import apiClient from './axios';
-import {
+import type {
   ApiResponse,
   Testimonial,
   PaginatedData,
   AdminStats,
   AdminTestimonialQuery,
 } from '../types';
-import { CreateTestimonialFormData } from '../schemas/testimonial.schema';
+import type { CreateTestimonialFormData } from '../schemas/testimonial.schema';
 
 // ─── Testimonial API ──────────────────────────────────────────────────────────
 

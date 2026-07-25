@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useAdminTestimonials } from '../../hooks/useAdminTestimonials';
 import { useAdminStats } from '../../hooks/useAdminStats';
 import { testimonialApi } from '../../api/testimonial.api';
-import {
+import type {
   Testimonial,
   AdminTestimonialQuery,
   PageLimit,
@@ -33,9 +33,9 @@ const StatCard: React.FC<StatCardProps> = ({ label, value, color, icon }) => (
     </div>
     <div>
       <p className="text-sm text-gray-400">{label}</p>
-      <p className="text-2xl font-bold text-white mt-0.5">
+      <div className="text-2xl font-bold text-white mt-0.5">
         {value === null ? <Spinner size="sm" /> : value.toLocaleString()}
-      </p>
+      </div>
     </div>
   </div>
 );

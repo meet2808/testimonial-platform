@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { testimonialApi } from '../api/testimonial.api';
-import { Testimonial, PaginatedData, AdminTestimonialQuery } from '../types';
+import type { Testimonial, PaginatedData, AdminTestimonialQuery } from '../types';
 import { extractErrorMessage } from '../utils/formatters';
 
 // ─── useAdminTestimonials ─────────────────────────────────────────────────────

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
+import  {
   createTestimonialSchema,
-  CreateTestimonialFormData,
+  type CreateTestimonialFormData,
 } from '../schemas/testimonial.schema';
 import { testimonialApi } from '../api/testimonial.api';
 import { extractErrorMessage } from '../utils/formatters';

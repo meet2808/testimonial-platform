@@ -1,5 +1,5 @@
 import React from 'react';
-import { TestimonialStatus } from '../../types';
+import type { TestimonialStatus } from '../../types';
 
 interface BadgeProps {
   status: TestimonialStatus;

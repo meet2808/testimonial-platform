@@ -5,9 +5,9 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { Admin } from '../types';
+import type { Admin } from '../types';
 import { authApi } from '../api/auth.api';
-import { LoginFormData } from '../schemas/auth.schema';
+import type { LoginFormData } from '../schemas/auth.schema';
 
 // ─── Auth Context Types ───────────────────────────────────────────────────────
 interface AuthContextValue {
