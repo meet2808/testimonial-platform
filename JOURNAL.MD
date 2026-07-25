@@ -3,7 +3,28 @@
 ## 1\. Prioritization
 
 * What did you decide to build, in what order, and why?
+
+Befor implementation, I have decided to understand assignment and .
+
+Implementation Order :
+ 1. Understand the assignment and requirements
+    - Read assignment to understand which features are requested and what should I need to and don't.
+ 2. Choose technology stack
+    - I have choose below tech stack as per my knowledge
+    - Frontend : React.Js, Typescript, TailwindCSS, React-Router, Vite
+    - Backend  : Node.Js, Typescritp, Express.Js, Prisma, PostgreSQL
+ 3. Plan architecture
+    - Here I have used monolithic architecture so it is easy to maintain and future deployment.
+ 4. Set up project
+    - For setting up project I have used AI for that where, it has setup the project.
+ 5. Implement core features
+    - As I have already clear all requirement to the AI so all core features and designing parts was done by AI, mean while I have review code which was implemented by AI.
+ 6. Testing 
+    - After project setup completed I have verify each and every component workflow to make sure it works correctly and not. While verify those workflow I have getting  some minor errors which I have fix.
+
 * What did you deliberately cut or skip? Why those?
+
+I decided to focus on building/implementing core features first and skip adding extra features or edge case scenarios. While deciding testimonials workflow I need to handle duplicate testimonials submissions by user, instead of put validation for this I leave this decision at Admin side wheather they want to show this testimonial or not.
 
 ## 2\. Key decisions
 
@@ -17,8 +38,30 @@ Include the calls you made where the brief was silent.
 
 ## 3\. Working with AI agents
 
-* **Tools and models used:** which agent/editor (Claude Code, Codex, Cursor, Cline, aider, …), which models, and for what kind of work.
-* **How you split the work:** what tasks you gave the agent, what you kept for yourself, and why.
+* **Tools and models used:** 
+  - Here I have used Antigravity Code Editor in that for this project i have used below models for different purpose :
+    | Model | Use case |
+    |---|---|
+    | `Claude Sonnet 4.6 (Thinking)` | Project setup |
+    | `Gemini 3.6 Flash (Medium)` | Implementation conversation |
+    
+* **How you split the work:** 
+  Before implementation, I reviewed the assignment requirements and decided on the technology stack and overall development approach.
+
+  I used AI too :
+  - Discuss the project architecture.
+  - Set up the frontend and backend projects
+  - Generate implementation for individual features.
+  - Suggest improvements and refactoring.
+  - Explain unfamiliar concepts and implementation details.
+
+  My responsibilities :
+  - Making architectural and technology decisions.
+  - Reviewing the generated code before accepting it.
+  - Testing features end-to-end.
+  - Fixing issues found during testing.
+  - Ensuring the final implementation matched the assignment requirements.
+  
 * **Your agent setup:** if you wrote instruction/rules files, skills, or commands (they must be committed — see the brief), say briefly what each is for and what problem it solved. If you used none, say so here.
 * **Your 3–5 most important prompts:** paste them and say why each worked — or didn't.
 * **At least one time AI was wrong:** what it produced, how you noticed, what you did. If AI was never wrong in 6+ hours of use, say so — and expect us to ask about it.
