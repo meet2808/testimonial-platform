@@ -6,6 +6,8 @@ import StarRating from '../components/ui/StarRating';
 import Spinner from '../components/ui/Spinner';
 import { truncate } from '../utils/formatters';
 
+import CardSkeletonGrid from '../components/ui/CardSkeleton';
+
 // ─── Preset Accent Maps ───────────────────────────────────────────────────────
 const ACCENT_PRESETS: Record<string, string> = {
   indigo: '#6366f1',
@@ -170,10 +172,10 @@ const WidgetPage: React.FC = () => {
         )} */}
       </div>
 
-      {/* Loading State */}
+      {/* Loading Skeleton State */}
       {isLoading && (
-        <div className="flex items-center justify-center py-12">
-          <Spinner size="md" />
+        <div className="max-w-6xl mx-auto">
+          <CardSkeletonGrid count={3} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" />
         </div>
       )}
 

@@ -17,6 +17,7 @@ import Button from '../../components/ui/Button';
 import StarRating from '../../components/ui/StarRating';
 import Modal from '../../components/ui/Modal';
 import Spinner from '../../components/ui/Spinner';
+import TableSkeleton from '../../components/ui/TableSkeleton';
 
 // ─── Stat Card ────────────────────────────────────────────────────────────────
 interface StatCardProps {
@@ -284,13 +285,24 @@ const DashboardPage: React.FC = () => {
 
         {/* Table */}
         <div className="bg-gray-900/60 border border-white/10 rounded-2xl overflow-hidden">
-          {/* Loading */}
+          {/* Loading Skeleton Table */}
           {isLoading && (
-            <div className="flex items-center justify-center py-20">
-              <div className="flex flex-col items-center gap-3">
-                <Spinner size="lg" />
-                <p className="text-sm text-gray-500">Loading testimonials...</p>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-white/10 bg-white/5">
+                    <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-4">Customer</th>
+                    <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-4 hidden md:table-cell">Rating</th>
+                    <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-4 hidden lg:table-cell">Message</th>
+                    <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-4">Status</th>
+                    <th className="text-left text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-4 hidden xl:table-cell">Submitted</th>
+                    <th className="text-right text-xs font-medium text-gray-500 uppercase tracking-wider px-6 py-4">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <TableSkeleton rows={5} />
+                </tbody>
+              </table>
             </div>
           )}
 

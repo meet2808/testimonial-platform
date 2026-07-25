@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { usePublicTestimonials } from '../hooks/useTestimonials';
 import Avatar from '../components/ui/Avatar';
 import StarRating from '../components/ui/StarRating';
-import Spinner from '../components/ui/Spinner';
 import { formatDate, truncate } from '../utils/formatters';
 import type { Testimonial } from '../types';
+import Navbar from '../components/layout/Navbar';
+import CardSkeletonGrid from '../components/ui/CardSkeleton';
 
 // ─── Testimonial Card ─────────────────────────────────────────────────────────
 const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({
@@ -59,7 +60,9 @@ const PublicWallPage: React.FC = () => {
   }, [refetch]);
 
   return (
-    <div className="min-h-screen bg-gray-950 py-16 px-4">
+    <div className="min-h-screen bg-gray-950 flex flex-col">
+      <Navbar />
+      <div className="flex-1 py-16 px-4 relative">
       {/* Background glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-indigo-600/8 rounded-full blur-3xl" />
@@ -85,13 +88,8 @@ const PublicWallPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Loading */}
-        {isLoading && (
-          <div className="flex flex-col items-center gap-4 py-24">
-            <Spinner size="lg" />
-            <p className="text-sm text-gray-500">Loading testimonials...</p>
-          </div>
-        )}
+        {/* Loading Skeleton */}
+        {isLoading && <CardSkeletonGrid count={6} />}
 
         {/* Error */}
         {error && !isLoading && (
@@ -136,6 +134,7 @@ const PublicWallPage: React.FC = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };

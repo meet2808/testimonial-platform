@@ -11,6 +11,7 @@ import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import StarRating from '../components/ui/StarRating';
 import Avatar from '../components/ui/Avatar';
+import Navbar from '../components/layout/Navbar';
 
 // ─── Submission Page ──────────────────────────────────────────────────────────
 
@@ -77,25 +78,28 @@ const SubmissionPage: React.FC = () => {
   // ── Success State ──────────────────────────────────────────────────────────
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-gray-950 flex items-center justify-center p-6">
-        <div className="max-w-md w-full text-center">
-          <div className="w-20 h-20 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6">
-            <svg className="w-10 h-10 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
+      <div className="min-h-screen bg-gray-950 flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center p-6">
+          <div className="max-w-md w-full text-center">
+            <div className="w-20 h-20 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-6">
+              <svg className="w-10 h-10 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h1 className="text-3xl font-bold text-white mb-3">Thank You!</h1>
+            <p className="text-gray-400 mb-8 leading-relaxed">
+              Your testimonial has been submitted successfully. It will be reviewed
+              and published once approved. We truly appreciate your feedback!
+            </p>
+            <Button
+              variant="secondary"
+              onClick={() => setIsSubmitted(false)}
+              size="lg"
+            >
+              Submit Another Testimonial
+            </Button>
           </div>
-          <h1 className="text-3xl font-bold text-white mb-3">Thank You!</h1>
-          <p className="text-gray-400 mb-8 leading-relaxed">
-            Your testimonial has been submitted successfully. It will be reviewed
-            and published once approved. We truly appreciate your feedback!
-          </p>
-          <Button
-            variant="secondary"
-            onClick={() => setIsSubmitted(false)}
-            size="lg"
-          >
-            Submit Another Testimonial
-          </Button>
         </div>
       </div>
     );
@@ -103,7 +107,9 @@ const SubmissionPage: React.FC = () => {
 
   // ── Form ───────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-gray-950 py-12 px-4">
+    <div className="min-h-screen bg-gray-950 flex flex-col">
+      <Navbar />
+      <div className="flex-1 py-12 px-4 relative">
       {/* Background glow */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl" />
@@ -338,6 +344,7 @@ const SubmissionPage: React.FC = () => {
           Your data is secure and will only be used as described above.
         </p>
       </div>
+    </div>
     </div>
   );
 };

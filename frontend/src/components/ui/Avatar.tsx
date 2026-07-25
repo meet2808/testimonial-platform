@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { getInitials, getAvatarColor } from '../../utils/formatters';
 
 interface AvatarProps {
@@ -14,10 +14,8 @@ const sizeClasses = {
   lg: 'w-16 h-16 text-base',
 };
 
-// ─── Avatar ───────────────────────────────────────────────────────────────────
-// Displays a profile image if available, otherwise a colored circle with
-// the customer's initials. Color is deterministically derived from the name
-// so it stays consistent across renders.
+// ─── Avatar Component ─────────────────────────────────────────────────────────
+// Displays a profile image if available, falling back to a colored initials circle.
 
 const Avatar: React.FC<AvatarProps> = ({
   name,
@@ -28,24 +26,26 @@ const Avatar: React.FC<AvatarProps> = ({
   const sizeClass = sizeClasses[size];
   const initials = getInitials(name);
   const bgColor = getAvatarColor(name);
+  const [hasError, setHasError] = useState(false);
 
-  if (imageUrl) {
+  useEffect(() => {
+    setHasError(false);
+  }, [imageUrl]);
+
+  if (imageUrl && !hasError) {
     return (
       <img
         src={imageUrl}
         alt={`${name}'s profile photo`}
         className={`${sizeClass} rounded-full object-cover ring-2 ring-white/10 flex-shrink-0 ${className}`}
-        onError={(e) => {
-          // If image fails to load, hide it so the fallback renders
-          (e.target as HTMLImageElement).style.display = 'none';
-        }}
+        onError={() => setHasError(true)}
       />
     );
   }
 
   return (
     <div
-      className={`${sizeClass} rounded-full flex items-center justify-center flex-shrink-0 font-semibold text-white ${className}`}
+      className={`${sizeClass} rounded-full flex items-center justify-center flex-shrink-0 font-semibold text-white ring-2 ring-white/10 ${className}`}
       style={{ backgroundColor: bgColor }}
       aria-label={`${name}'s avatar`}
       role="img"
