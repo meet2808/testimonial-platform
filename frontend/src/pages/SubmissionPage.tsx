@@ -309,6 +309,8 @@ const SubmissionPage: React.FC = () => {
               )}
             </div>
 
+            <input type="text" id="honeypot" tabIndex={-1} style={{ display: 'none' }} {...register("honeypot")} />
+
             {/* Server error */}
             {submitError && (
               <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">

@@ -64,8 +64,10 @@ Include the calls you made where the brief was silent.
   
 * **Your agent setup:** if you wrote instruction/rules files, skills, or commands (they must be committed — see the brief), say briefly what each is for and what problem it solved. If you used none, say so here.
 * **Your 3–5 most important prompts:** paste them and say why each worked — or didn't.
-* **At least one time AI was wrong:** what it produced, how you noticed, what you did. If AI was never wrong in 6+ hours of use, say so — and expect us to ask about it.
-* **Something you rejected:** AI output you threw away or heavily rewrote, and why.
+* **At least one time AI was wrong:**
+ - I instruct AI to implement validation for junk message line like "asdfdfdfdfdfvggsdg" this then show validation message like "Please enter atlest 3 meaningfull words". But here main catch is that if we write line like "this is ykkndwrehj" or "adfew huiwruer adfuyuwer" then it will accept this input as it is without showing any validation. So this is not meaningful implement.
+* **Something you rejected:**
+ - As I describe above I am not satisfy with this functionality so i have discard this functionality.
 
 ## 4\. Verification
 

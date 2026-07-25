@@ -24,6 +24,19 @@ export const testimonialController = {
    * Public — submit a new testimonial.
    */
   submit: asyncHandler(async (req: Request, res: Response): Promise<void> => {
+    // ── Honeypot Anti-Spam Check ──
+    // If the hidden honeypot field is filled out, a bot submitted the form.
+    // Silently return success so the bot thinks it succeeded, without saving anything to the DB.
+    if (req.body.honeypot && typeof req.body.honeypot === 'string' && req.body.honeypot.trim() !== '') {
+      sendSuccess(
+        res,
+        'Your testimonial has been submitted successfully! It will be visible after review.',
+        undefined,
+        201
+      );
+      return;
+    }
+
     let profileImageUrl: string | undefined;
 
     if (req.file) {

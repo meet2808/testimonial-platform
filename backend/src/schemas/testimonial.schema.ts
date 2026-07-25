@@ -48,6 +48,8 @@ export const createTestimonialSchema = z.object({
       return val;
     })
     .pipe(z.boolean().refine((val) => val === true, 'You must give consent to submit a testimonial')),
+
+  honeypot: z.string().optional(),
 });
 
 // ─── Admin Testimonial List Query Schema ──────────────────────────────────────

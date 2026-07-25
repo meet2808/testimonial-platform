@@ -47,6 +47,8 @@ export const createTestimonialSchema = z.object({
   consentGiven: z.boolean().refine((val) => val === true, {
     message: 'You must agree to the terms before submitting',
   }),
+
+  honeypot: z.string().optional(),
 });
 
 export type CreateTestimonialFormData = z.infer<typeof createTestimonialSchema>;
