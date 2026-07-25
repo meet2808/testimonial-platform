@@ -36,7 +36,7 @@ app.use(
 // We apply open CORS only to this specific route before mounting the main router.
 app.use(
   '/api/v1/testimonials/widget',
-  cors({ origin: '*', methods: ['GET'] })
+  cors({ origin: 'http://localhost:5173', methods: ['GET'] })
 );
 
 // ─── Request Parsing ──────────────────────────────────────────────────────────
