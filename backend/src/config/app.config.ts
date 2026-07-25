@@ -40,6 +40,9 @@ const config = {
     maxFileSizeMb: parseInt(process.env.MAX_FILE_SIZE_MB ?? '20', 10),
     allowedMimeTypes: ['image/jpeg', 'image/jpg', 'image/png'] as string[],
     allowedExtensions: ['.jpg', '.jpeg', '.png'] as string[],
+    supabaseBucketUrl: process.env.SUPABASE_BUCKET_URL ?? '',
+    supabaseUrl: process.env.SUPABASE_URL ?? '',
+    supabaseKey: process.env.SUPABASE_KEY ?? process.env.SUPABASE_ANON_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? '',
   },
 } as const;
 

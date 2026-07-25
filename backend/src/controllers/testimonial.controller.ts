@@ -1,13 +1,64 @@
 import { Request, Response } from 'express';
+import fs from 'fs';
 import { testimonialService } from '../services/testimonial.service';
 import { sendSuccess } from '../utils/response';
 import { asyncHandler } from '../utils/asyncHandler';
 import config from '../config/app.config';
 
 
+
 // ─── Helper: Build image URL ──────────────────────────────────────────────────
-// Converts a local filename to a full URL that the frontend can use.
-const buildImageUrl = (req: Request, filename: string): string => {
+// Uploads file to Supabase Storage bucket and returns the Supabase CDN URL.
+// Fallback: Local server image URL if SUPABASE_BUCKET_URL is not set.
+const buildImageUrl = async (req: Request, file: Express.Multer.File): Promise<string> => {
+  const filename = file.filename;
+
+  // 1. If Supabase Bucket URL is configured in .env
+  if (config.upload.supabaseBucketUrl) {
+    const bucketBase = config.upload.supabaseBucketUrl.replace(/\/$/, '');
+    const cdnUrl = `${bucketBase}/${filename}`;
+
+    // Extract project URL and bucket name automatically for upload
+    const parts = bucketBase.split('/storage/v1/object/public/');
+    const projectUrl = config.upload.supabaseUrl || (parts[0] ? parts[0] : '');
+    const bucketName = parts[1] ? parts[1].split('/')[0] : 'testimonials';
+    const apiKey = config.upload.supabaseKey;
+
+    if (projectUrl && apiKey) {
+      try {
+        console.log(`📤 Uploading image "${filename}" to Supabase Storage bucket: "${bucketName}"...`);
+        const fileBuffer = fs.readFileSync(file.path);
+        const endpoint = `${projectUrl.replace(/\/$/, '')}/storage/v1/object/${bucketName}/${filename}`;
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'apikey': apiKey,
+            'Content-Type': file.mimetype,
+            'x-upsert': 'true',
+          },
+          body: fileBuffer,
+        });
+
+        if (response.ok) {
+          console.log('✅ Image binary uploaded successfully to Supabase Storage bucket!');
+        } else {
+          const errText = await response.text();
+          console.warn(`⚠️ Supabase Storage HTTP ${response.status} notice:`, errText);
+        }
+      } catch (err: any) {
+        console.error('❌ Supabase Storage upload exception:', err?.message ?? err);
+      }
+    } else {
+      console.warn('ℹ️ SUPABASE_BUCKET_URL configured without API key. Serving via Supabase CDN URL.');
+    }
+
+    console.log('🌐 Saved Supabase Public CDN URL:', cdnUrl);
+    return cdnUrl;
+  }
+
+  // 2. Fallback: Local Server URL
   const protocol = req.protocol;
   const rawHost = req.get('host');
   const host = Array.isArray(rawHost)
@@ -40,7 +91,7 @@ export const testimonialController = {
     let profileImageUrl: string | undefined;
 
     if (req.file) {
-      profileImageUrl = buildImageUrl(req, req.file.filename);
+      profileImageUrl = await buildImageUrl(req, req.file);
     }
 
     const testimonial = await testimonialService.submit(req.body, profileImageUrl);

@@ -95,8 +95,8 @@ const WidgetPage: React.FC = () => {
 
   // ── Duplicate list for continuous infinite loop ──────────────────────────────
   const displayTestimonials = useMemo(() => {
-    if (testimonials.length === 0) return [];
-    // If small number of items, duplicate to create a long continuous loop
+    if (testimonials.length <= 1) return testimonials;
+    // If multiple items (< 10), duplicate to create a seamless continuous marquee loop
     if (testimonials.length < 10) {
       return [...testimonials, ...testimonials, ...testimonials];
     }

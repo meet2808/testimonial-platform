@@ -7,7 +7,7 @@ import axios from 'axios';
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5000/api/v1',
   withCredentials: true,   // Required to send/receive HttpOnly JWT cookies
-  timeout: 15000,          // 15 second timeout
+  timeout: 60000,          // 15 second timeout
   headers: {
     'Content-Type': 'application/json',
   },
