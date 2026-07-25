@@ -21,6 +21,7 @@ export const testimonialApi = {
     formData.append('company', data.company);
     formData.append('message', data.message);
     formData.append('rating', String(data.rating));
+    formData.append('consentGiven', String(data.consentGiven));
     if (data.honeypot) {
       formData.append('honeypot', data.honeypot);
     }
