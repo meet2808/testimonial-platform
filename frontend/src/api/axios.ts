@@ -4,10 +4,15 @@ import axios from 'axios';
 // All API calls go through this instance — never import raw axios elsewhere.
 // This ensures all requests share the same base URL, timeout, and interceptors.
 
+const baseURL =
+  import.meta.env.VITE_API_BASE_URL ??
+  import.meta.env.VITE_API_URL ??
+  'http://localhost:5000/api/v1';
+
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5000/api/v1',
+  baseURL,
   withCredentials: true,   // Required to send/receive HttpOnly JWT cookies
-  timeout: 60000,          // 15 second timeout
+  timeout: 60000,          // 60 second timeout
   headers: {
     'Content-Type': 'application/json',
   },
