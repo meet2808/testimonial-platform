@@ -74,6 +74,7 @@ For each decision that shaped the project (aim for 3–6), one short block:
 
 * How did you convince yourself the code actually works? Be specific: what did you run, click, test, or inspect?
 * What do you know is still broken or fragile?
+   - so after adding honey pot functionality added in testimonial form I check this functionality by manually visible honeypot using browser devtools and then manually fill that field at that time I get to know that it has remove consentGiven field from api body and I got "Invalid Field" error.
 
 ## 5\. If I had 5 more hours
 
